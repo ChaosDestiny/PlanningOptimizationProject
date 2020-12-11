@@ -26,7 +26,7 @@ public class CVRPDP {
         this.solver = MPSolver.createSolver("CRVPDP solver","CBC");
     }
 
-    void solve() {
+    private void solve() {
         System.out.println("Solver is starting...");
         int N = cvrpdp_data.N;                  //  Number of customer
         int K = cvrpdp_data.K;                  //  Number of bus
@@ -112,14 +112,6 @@ public class CVRPDP {
             MPConstraint c = solver.makeConstraint(0, 1);
             for (int i = 0; i <= 2*N; i++) {
                 c.setCoefficient(x[k][i][2*N+1], 1);
-            }
-        }
-
-        //  All bus have to depart
-        for (int k = 1; k <= K; k++) {
-            MPConstraint c = solver.makeConstraint(1, 1);
-            for (int i = 1; i <= N; i++) {
-                c.setCoefficient(x[k][0][i], 1);
             }
         }
 
@@ -265,7 +257,7 @@ public class CVRPDP {
     }
 
     public static void main(String[] args) {
-        CVRPDP cvrpdp = new CVRPDP("./src/class118133/trandinhhung/data.txt");
+        CVRPDP cvrpdp = new CVRPDP("./src/class118133/trandinhhung/data1.txt");
         long start = System.currentTimeMillis();
         cvrpdp.solve();
         long end = System.currentTimeMillis();
